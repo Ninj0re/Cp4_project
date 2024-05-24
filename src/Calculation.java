@@ -23,7 +23,7 @@ public class Calculation {
         return Math.sqrt((2 * annualDemand * (k + (penaltyCost * nR))) / holdingCost);
     }
     public double Zformula(double Q, double holdingCost, double annualDemand, double penaltyCost) {
-        double Fr = 1 - (Q * holdingCost) / (penaltyCost * annualDemand);
+        double Fr = fR(Q, holdingCost, annualDemand, penaltyCost);
         double index = chart[0][0];
         double min = Math.abs(chart[0][1] - Fr);
         for (int i=0; i< chart.length; i++) {
@@ -32,8 +32,11 @@ public class Calculation {
                 min = Math.abs(chart[i][1] - Fr);
             }
         }
-        System.out.println(index);
         return index;
+    }
+
+    public double fR(double Q, double holdingCost, double annualDemand, double penaltyCost){
+        return 1 - (Q * holdingCost) / (penaltyCost * annualDemand);
     }
 
     public double Rformula(double leadTimeDemand, double leadTimeStandardDeviation, double Z) {
